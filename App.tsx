@@ -21,7 +21,7 @@ const App: React.FC = () => {
       setData(result);
     } catch (err: any) {
       // User friendly error mapping
-      if (err.message && err.message.includes("API Key")) {
+      if (err.message && err.message.includes("AIzaSyAuEUSYpTfXq28k9kiTsSywz8pvUYoRmuU")) {
         setError("API Configuration Error: API Key is missing.");
       } else {
         setError("Failed to generate keywords. Please try again or check your internet connection.");
