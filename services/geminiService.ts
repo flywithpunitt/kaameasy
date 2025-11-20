@@ -1,7 +1,7 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { KeywordResponse } from "../types";
 
-const apiKey = process.env.API_KEY;
+const apiKey = AIzaSyAuEUSYpTfXq28k9kiTsSywz8pvUYoRmuU;
 // Only initialize if key exists, otherwise we handle the error in the UI or service call
 const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
