@@ -1,15 +1,13 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { KeywordResponse } from "../types";
 
-const apiKey = AIzaSyAuEUSYpTfXq28k9kiTsSywz8pvUYoRmuU;
-// Only initialize if key exists, otherwise we handle the error in the UI or service call
-const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
+// 🔥 Hardcoded API Key (you asked for it)
+const apiKey = "AIzaSyAuEUSYpTfXq28k9kiTsSywz8pvUYoRmuU";
+
+// Initialize Gemini client
+const ai = new GoogleGenAI({ apiKey });
 
 export const generateKeywords = async (clientDescription: string): Promise<KeywordResponse> => {
-  if (!ai) {
-    throw new Error("API Key is missing. Please check your environment configuration.");
-  }
-
   const model = "gemini-2.5-flash";
 
   const prompt = `
@@ -25,7 +23,7 @@ export const generateKeywords = async (clientDescription: string): Promise<Keywo
     2. Conceptual: Metaphors and abstract ideas (e.g., "success", "isolation", "connection", "innovation").
     3. Emotional: The mood or vibe (e.g., "melancholic", "energetic", "hopeful", "cinematic").
     4. Technical: Shot types and styles (e.g., "slow motion", "drone shot", "bokeh", "close up", "4k").
-    5. Search Phrases: Complete, ready-to-paste search queries that combine these elements for best results (e.g., "corporate team meeting slow motion cinematic").
+    5. Search Phrases: Complete, ready-to-paste search queries that combine these elements for best results.
     
     Return ONLY JSON.
   `;
@@ -41,28 +39,23 @@ export const generateKeywords = async (clientDescription: string): Promise<Keywo
           properties: {
             literal: {
               type: Type.ARRAY,
-              items: { type: Type.STRING },
-              description: "Direct visual descriptions of subjects and actions."
+              items: { type: Type.STRING }
             },
             conceptual: {
               type: Type.ARRAY,
-              items: { type: Type.STRING },
-              description: "Abstract concepts and metaphors related to the request."
+              items: { type: Type.STRING }
             },
             emotional: {
               type: Type.ARRAY,
-              items: { type: Type.STRING },
-              description: "Mood, atmosphere, and emotional tone keywords."
+              items: { type: Type.STRING }
             },
             technical: {
               type: Type.ARRAY,
-              items: { type: Type.STRING },
-              description: "Camera terminology, lighting styles, and format keywords."
+              items: { type: Type.STRING }
             },
             searchPhrases: {
               type: Type.ARRAY,
-              items: { type: Type.STRING },
-              description: "Full search phrases optimized for stock footage engines."
+              items: { type: Type.STRING }
             }
           },
           required: ["literal", "conceptual", "emotional", "technical", "searchPhrases"]
